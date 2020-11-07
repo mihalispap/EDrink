@@ -55,3 +55,5 @@ docs/_build/
 */__pycache__/
 *.pyc
 /static/config/config.json
+/edrink/migrations/*
+db.sqlite3
