@@ -1,4 +1,4 @@
-__all__ = ['Avatar', 'Participant', 'Room', 'Settings']
+__all__ = ['Avatar', 'Room', 'Settings', 'Participant']
 
 from edrink.models.avatar import Avatar
 from edrink.models.participant import Participant
