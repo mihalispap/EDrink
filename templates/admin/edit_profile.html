@@ -1,0 +1,16 @@
+{% extends "admin/base_site.html" %}
+
+{% block sidebar %}
+    {{ block.super }}
+    <div>
+
+        <h1>Edit Profile</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save</button>
+        </form>
+
+    </div>
+{% endblock %}

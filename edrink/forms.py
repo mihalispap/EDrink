@@ -1,21 +1,18 @@
 from django import forms
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django_registration.views import RegistrationView
 
-from edrink.models import Participant
+from edrink.models import User
 
 
 class SignUpForm(UserCreationForm):
     username = forms.CharField(max_length=30)
-
-    name = forms.CharField(max_length=256, required=False)
     avatar = forms.ImageField(required=False)
 
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2', 'name', 'avatar')
+        fields = ('username', 'password1', 'password2', 'avatar')
 
 
 class CustomRegistration(RegistrationView):
@@ -25,12 +22,15 @@ class CustomRegistration(RegistrationView):
             password = form.cleaned_data.get('password1')
             user = authenticate(username=username, password=password)
             # TODO: do something if exists
-            name = form.cleaned_data.get('name')
             avatar = form.cleaned_data.get('avatar')
             user = form.save()
             user.is_staff = True
             user.save()
-            participant = Participant(user=user, name=name, avatar=avatar)
-            participant.save()
         else:
             pass  # TODO: do something here
+
+
+class EditProfileForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['avatar', ]
