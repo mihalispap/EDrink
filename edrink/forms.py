@@ -31,6 +31,8 @@ class CustomRegistration(RegistrationView):
 
 
 class EditProfileForm(forms.ModelForm):
+    avatar = forms.ImageField(required=False)
+
     class Meta:
         model = User
         fields = ['avatar', ]

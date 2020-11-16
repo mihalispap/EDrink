@@ -26,4 +26,5 @@ urlpatterns = [
          CustomRegistration.as_view(success_url='/admin/', form_class=SignUpForm),
          name='django_registration_register'),
     url(r'^admin/profile/edit/$', views.edit_profile, name='edit_profile'),
+    path('admin/assign-rooms', views.assign_rooms, name='assign_rooms'),
 ]

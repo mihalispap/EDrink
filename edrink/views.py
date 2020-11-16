@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.urls import reverse
 
 from edrink.forms import EditProfileForm
+from edrink.models import User, Room
 
 
 def edit_profile(request):
@@ -21,3 +22,17 @@ def edit_profile(request):
     }
 
     return render(request, "admin/edit_profile.html", context)
+
+
+def assign_rooms(request):
+    users = User.objects.all().order_by('?')
+    rooms = [room for room in Room.objects.all().order_by('capacity')]
+    for user in users:
+        if len(rooms) == 0:
+            break
+        user.assigned_in_room = rooms[0]
+        rooms[0].capacity -= 1
+        if rooms[0].capacity == 0:
+            rooms.pop(0)
+        user.save()
+    return HttpResponseRedirect('%s' % (reverse('admin:index')))

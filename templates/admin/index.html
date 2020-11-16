@@ -3,6 +3,10 @@
 {% block sidebar %}
     {{ block.super }}
     <div>
+        {% if request.user.is_superuser %}
+            <a href="/admin/assign-rooms">Assign Rooms</a>
+        {% endif %}
+
         <a href="/admin/profile/edit">View/Edit Profile</a>
     </div>
 {% endblock %}
